@@ -10513,7 +10513,7 @@ IonicModule
 *   <ion-input>
 *
 *   <ion-input>
-*     <ion-label>Username</ion-label>
+*     <ion-label>username</ion-label>
 *     <input type="text">
 *   </ion-input>
 * </ion-list>
@@ -10560,7 +10560,7 @@ IonicModule
 * ```html
 * <ion-list>
 *   <ion-input>
-*     <ion-label>Username</ion-label>
+*     <ion-label>username</ion-label>
 *     <input type="text">
 *   </ion-input>
 * </ion-list>

@@ -1,7 +1,13 @@
 /**
  * Created by mathieudiab on 16-02-20.
  */
-.factory('User', function (Organisation) {
+
+/**
+ * Created by mathieudiab on 16-02-20.
+ */
+angular.module('skwad.settingsFactory', [])
+
+  .factory('SkwadPerson', function($scope) {
 
   /**
    * Constructor, with class name
@@ -59,4 +65,4 @@
    * Return the constructor function
    */
   return User;
-})
+});

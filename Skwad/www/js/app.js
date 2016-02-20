@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'skwad.username', 'skwad.userlist', 'skwad.settingsFactory', 'skwad.start'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -30,10 +30,22 @@ angular.module('starter', ['ionic'])
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
     $stateProvider
-      .state('/Username', {
-        url: '/Username',
-        controller: ''
+      .state('/start', {
+        url: '/start',
+        controller: 'StartCtrl'
       })
+      .state('/userlist', {
+        url: '/userlist',
+        templateUrl: 'modules/userlist/userlist.html',
+        controller: 'UserlistCtrl'
+      })
+      .state('/username', {
+        url: '/username',
+        templateUrl: 'modules/username/username.html',
+        controller: 'UsernameCtrl'
+      })
+
+    $urlRouterProvider.otherwise('/username');
   })
 
 

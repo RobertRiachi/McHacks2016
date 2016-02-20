@@ -20,6 +20,12 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <script src="modules/start/start.js"></script>
+    <script src="modules/userlist/userlist.js"></script>
+    <script src="modules/username/username.js"></script>
+    <script src="factory/settingsFactory.js"></script>
+    <script src="factory/SkwadPerson.js"></script>
+
   </head>
   <body ng-app="starter">
 
@@ -27,7 +33,7 @@
       <ion-header-bar class="bar-royal">
         <button class="button button-clear button">Range</button>
         <div class="h1 title">Skwad</div>
-        <button class="button button-clear button">Accounts</button>
+        <button class="button button-clear button" ng-click="username()">Accounts</button>
       </ion-header-bar>
       <ion-content>
       </ion-content>
