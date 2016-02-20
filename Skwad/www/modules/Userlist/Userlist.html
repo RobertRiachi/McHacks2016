@@ -1,13 +1,13 @@
 <ion-view view-title="People Near You">
   <ion-content>
     <div class="list">
-
       <a class="item item-avatar" ng-repeat="fullnames in usernames">
         <h2>{{fullnames.fullname}}</h2>
       </a>
-
-
     </div>
   </ion-content>
+  <div class="bar bar-footer bar-balanced">
+    <div class="title" ng-click="viewAccounts()">Manage Accounts</div>
+  </div>
 </ion-view>
 
