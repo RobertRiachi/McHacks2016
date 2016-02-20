@@ -1,13 +1,13 @@
 /**
  * Created by mathieudiab on 16-02-20.
  */
-angular.module('skwad.start', [])
+angular.module('skwad.start', ['skwad.settingsFactory'])
 
-  .controller('StartCtrl', function($scope,$location) {
+  .controller('StartCtrl', function($scope,$location, settingsFactory) {
     //Deferred function call
 
     function redirect(){
-      if(settingsFactory.getLanguage() != null && settingsFactory.getFontSize() != null){
+      if(settingsFactory.getUsername() == null){
         $location.path('username');
       }
       else{
@@ -15,6 +15,18 @@ angular.module('skwad.start', [])
       }
     }
 
-    loadSettings().done(redirect());
+    var loadUsername= function(){
+      var r = $.Deferred();
+
+      settingsFactory.loadUsername();
+
+      setTimeout(function () {
+        r.resolve();
+      }, 2500);
+
+      return r;
+    }
+
+    loadUsername().done(redirect());
 
   });
