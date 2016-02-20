@@ -5,7 +5,7 @@ angular.module('skwad.username', [])
 
   .controller('UsernameCtrl', function($scope) {
 
-    $scope.hello = hello;
+    $scope.hello = 'Hello';
 
 
   });
