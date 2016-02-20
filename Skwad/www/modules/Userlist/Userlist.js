@@ -3,7 +3,7 @@
  */
 angular.module('skwad.userlist', [])
 
-  .controller('UserlistCtrl', function($scope) {
+  .controller('UserlistCtrl', function($scope, $location) {
 
     var username = [
       {"fullname": "Rob"},
@@ -14,6 +14,9 @@ angular.module('skwad.userlist', [])
 
     $scope.usernames = username;
 
+    $scope.viewAccounts = function(){
+      $location.path('accounts');
+    };
 
 
   });
