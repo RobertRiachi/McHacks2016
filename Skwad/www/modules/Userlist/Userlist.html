@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-<ion-pane>
-  <ion-header-bar class="bar-royal">
-    <button class="button button-clear button">Range</button>
-    <div class="h1 title">Skwad</div>
-    <button class="button button-clear button">Accounts</button>
-  </ion-header-bar>
+<ion-view view-title="People Near You">
   <ion-content>
+    <div class="list">
+
+      <a class="item item-avatar" ng-repeat="fullnames in usernames">
+        <h2>{{fullnames.fullname}}</h2>
+      </a>
+
+
+    </div>
   </ion-content>
-</ion-pane>
-</body>
-</html>
+</ion-view>
+
