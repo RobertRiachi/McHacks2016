@@ -45,7 +45,7 @@ angular.module('starter', ['ionic', 'skwad.username', 'skwad.userlist', 'skwad.s
         controller: 'UsernameCtrl'
       })
 
-    $urlRouterProvider.otherwise('/username');
+    $urlRouterProvider.otherwise('/start');
   })
 
 
