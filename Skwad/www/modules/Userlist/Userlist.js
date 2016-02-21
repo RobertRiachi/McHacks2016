@@ -1,22 +1,16 @@
 /**
  * Created by mathieudiab on 16-02-20.
  */
-angular.module('skwad.userlist', [])
+angular.module('skwad.userlist', ['skwad.socketFactory'])
 
-  .controller('UserlistCtrl', function($scope, $location) {
+  .controller('UserlistCtrl', function($scope, $location, socketFactory) {
 
-    var username = [
-      {"fullname": "Rob"},
-      {"fullname": "Gabe"},
-      {"fullname": "Shaker"}
-    ];
-
-
-    $scope.usernames = username;
+    socketFactory.bindScope($scope);
 
     $scope.viewAccounts = function(){
       $location.path('accounts');
     };
 
+    $scope.refreshUser = socketFactory.requestNearbyUsers;
 
   });
