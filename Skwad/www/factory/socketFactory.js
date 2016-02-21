@@ -9,22 +9,10 @@ angular.module('skwad.socketFactory', ['skwad.settingsFactory'])
       var scope = null;
       var nearby = null;
 
-      function getGeoLocation() {
-          var geo = {
-              latitude: null,
-              longitude: null
-          };
-          $cordovaGeolocation
-          .getCurrentPosition()
-          .then(function (position) {
-              geo.latitude = position.coords.latitude;
-              geo.longitude = position.coords.longitude;
-              console.log(JSON.stringify(geo));
-          }, function(err) {
-            // error
-          });
-          return geo;
-      }
+      var geo = {
+          latitude: null,
+          longitude: null
+      };
 
       return {
           bindScope: function(_scope) {
@@ -38,35 +26,45 @@ angular.module('skwad.socketFactory', ['skwad.settingsFactory'])
               socket = io("142.157.80.44:13033");
 
               console.log("setup");
-              var geo = getGeoLocation();
-              socket.emit('setup', {
-                  userID: settingsFactory.getUsername(),
-                  latitude: geo.latitude,
-                  longitude: geo.longitude
+              $cordovaGeolocation
+              .getCurrentPosition()
+              .then(function (position) {
+                  geo.latitude = position.coords.latitude;
+                  geo.longitude = position.coords.longitude;
+
+                  console.log(JSON.stringify(geo));
+                  socket.emit('setup', {
+                      userID: settingsFactory.getUsername(),
+                      latitude: geo.latitude,
+                      longitude: geo.longitude
+                  });
+
+                  socket.on('nearby user response', function(data) {
+
+                  console.log("received nearby users " + JSON.stringify(data));
+
+                  nearby = data;
+                  var usernames = [];
+                  for (var user in data) {
+                      usernames.push({"fullname": user.userID});
+                  }
+                  scope.usernames = usernames;
+                });
+
+                socket.on('new nearby user', function(data) {
+
+                  console.log("received new user " + JSON.stringify(data));
+
+                  nearby[data.userID] = data;
+                  scope.usernames.push({"fullnames": data.userID});
+                });
+
+                console.log("Emitting request nearby");
+                socket.emit('request nearby');
+                }, function(err) {
+                // error
               });
 
-              socket.on('nearby user response', function(data) {
-
-                console.log("received nearby users " + JSON.stringify(data));
-
-                nearby = data;
-                var usernames = [];
-                for (var user in data) {
-                  usernames.push({"fullname": user.userID});
-                }
-                scope.usernames = usernames;
-              });
-
-              socket.on('new nearby user', function(data) {
-
-                console.log("received new user " + JSON.stringify(data));
-
-                nearby[data.userID] = data;
-                scope.usernames.push({"fullnames": data.userID});
-              });
-
-              console.log("Emitting request nearby");
-              socket.emit('request nearby');
           }
       }
 
