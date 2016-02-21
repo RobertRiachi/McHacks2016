@@ -4,17 +4,20 @@
 angular.module('skwad.accounts', [])
 
   .controller('AccountsCtrl', function($scope, $cordovaOauth) {
-    function twitterlogin (){
+<<<<<<< HEAD
+    function twitterLogin (){
       cordovaOauth.twitter("43KDzSuzdGWAployL1BjOxsTw","ZPGYMjbTuX4a9ftwhH7BLEw4EY7abCNrBO0XygpVcxrW2DRe4x");
+=======
+>>>>>>> diab
 
     }
     var accounts = [
       {"account": "Facebook",
         auth: null},
       {"account": "Twitter",
-      auth: twitterlogin()},
+      auth: twitterLogin()},
       {"account": "Instagram",
-        auth: null},
+        auth: instagramLogin()},
       {"account": "LinkedIn",
         auth: null},
       {"account": "Email",
@@ -25,6 +28,16 @@ angular.module('skwad.accounts', [])
 
 
     $scope.accounts = accounts;
+
+
+    function instagramLogin(){
+      $cordovaOauth.instagram("6dac6947026e410f887ff37c3666e71b", ['relationships']).then(function(result){
+        console.log(JSON.stringify(result));
+      }, function(error) {
+        // error
+      });
+
+    }
 
 
 
