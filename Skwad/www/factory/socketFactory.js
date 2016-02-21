@@ -26,7 +26,7 @@ angular.module('skwad.socketFactory', ['skwad.settingsFactory'])
               console.log("requesting nearby users");
 
               if (scope == null) return;
-              socket = io("142.157.80.44:7777");
+              socket = io("142.157.80.44:13033");
 
               console.log("setup");
               var geo = getGeoLocation();
