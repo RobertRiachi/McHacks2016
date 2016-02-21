@@ -4,17 +4,26 @@
 
 angular.module('skwad.socketFactory', ['skwad.settingsFactory'])
 
-  .factory('socketFactory', function(settingsFactory) {
+  .factory('socketFactory', function(settingsFactory, $cordovaGeolocation) {
       var socket = null;
       var scope = null;
       var nearby = null;
 
-
-    function getGeoLocation() {
-          return {
-              latitude: 0.0,
-              longitude: 0.0
-          }
+      function getGeoLocation() {
+          var geo = {
+              latitude: null,
+              longitude: null
+          };
+          $cordovaGeolocation
+          .getCurrentPosition()
+          .then(function (position) {
+              geo.latitude = position.coords.latitude;
+              geo.longitude = position.coords.longitude;
+              console.log(JSON.stringify(geo));
+          }, function(err) {
+            // error
+          });
+          return geo;
       }
 
       return {
@@ -38,10 +47,7 @@ angular.module('skwad.socketFactory', ['skwad.settingsFactory'])
 
               socket.on('nearby user response', function(data) {
 
-                console.log("received nearby users " + data.toString());
-                for (var user in data) {
-                    console.log(data[user].toString());
-                }
+                console.log("received nearby users " + JSON.stringify(data));
 
                 nearby = data;
                 var usernames = [];
@@ -53,13 +59,9 @@ angular.module('skwad.socketFactory', ['skwad.settingsFactory'])
 
               socket.on('new nearby user', function(data) {
 
-                console.log("received new user " + data.toString());
+                console.log("received new user " + JSON.stringify(data));
 
                 nearby[data.userID] = data;
-                for (var user in scope.usernames) {
-                  if (user.fullname == data.userID)
-                    return;
-                }
                 scope.usernames.push({"fullnames": data.userID});
               });
 
