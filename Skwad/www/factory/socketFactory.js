@@ -39,6 +39,9 @@ angular.module('skwad.socketFactory', ['skwad.settingsFactory'])
               socket.on('nearby user response', function(data) {
 
                 console.log("received nearby users " + data.toString());
+                for (var user in data) {
+                    console.log(data[user].toString());
+                }
 
                 nearby = data;
                 var usernames = [];
